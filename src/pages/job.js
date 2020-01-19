@@ -5,14 +5,14 @@ import { Fetch } from '../ajax/driver'
 
 export  function Job() {
     const[jobList, updateJobList] = useState([])
-
+    const url = process.env.NODE_ENV === 'production'?process.env.REACT_APP_URL:'http://localhost:5000'
     useEffect(()=>{
-         Fetch('http://localhost:5000/jobs', updateJobList)
+         Fetch(`${url}/jobs`, updateJobList)
         
         
         
 
-    },[])
+    },[url])
     return (
         <div>
             <Jobs job={jobList} />

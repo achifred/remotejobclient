@@ -64,7 +64,7 @@ export const subtxt = {
 };
 export const howitworkssubtxt = {
   title:
-    "At AchifDevJobs we help you secure your dream dev job by posting the latest jobs ."
+    "At AchifDevJobs we help you secure your dream dev job by posting the latest jobs from the right employers ."
 };
 
 export const about = {

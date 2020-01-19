@@ -64,7 +64,7 @@ function Navbar(props) {
           </Button>
         </Link>
       </Grid>
-      <Grid>
+     { /*<Grid>
         <Link style={{ textDecoration: "none" }} to={"/postjob"}>
           <Button
             variant="text"
@@ -73,7 +73,7 @@ function Navbar(props) {
             Post a Job
           </Button>
         </Link>
-      </Grid>
+     </Grid>*/}
     </Grid>
   ) 
   return (
