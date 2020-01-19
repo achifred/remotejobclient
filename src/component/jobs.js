@@ -41,7 +41,7 @@ export function Jobs({job}){
         res.location.toLowerCase().indexOf(search.toLowerCase()) !== -1
       );
     })
-  : "";
+  : [];
 
 
     return(
