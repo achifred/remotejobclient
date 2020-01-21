@@ -44,6 +44,16 @@ function SidebarContent({ openModal }) {
               </Button>
             </Link>
           </Grid>
+          <Grid>
+        <Link style={{ textDecoration: "none" }} to={"/postjob"}>
+          <Button
+            variant="text"
+            style={{  marginRight: 10 }}
+          >
+            Post a Job
+          </Button>
+        </Link>
+     </Grid>
          
         </div>
       

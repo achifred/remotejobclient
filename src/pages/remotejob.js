@@ -1,13 +1,13 @@
 import React, {useEffect,useState} from 'react'
-import {Jobs} from '../component/jobs'
+import {RemoteJobs} from '../component/remotejobs'
 import { Fetch } from '../ajax/driver'
 
 
-export  function Job() {
+export  function RemoteJob() {
     const[jobList, updateJobList] = useState([])
     const url = process.env.NODE_ENV === 'production'?process.env.REACT_APP_URL:'http://localhost:5000/'
     useEffect(()=>{
-         Fetch(`${url}devjob`, updateJobList)
+         Fetch(`${url}jobs`, updateJobList)
         
         
         
@@ -15,7 +15,7 @@ export  function Job() {
     },[url])
     return (
         <div>
-            <Jobs job={jobList} />
+            <RemoteJobs job={jobList} />
         </div>
     )
 }

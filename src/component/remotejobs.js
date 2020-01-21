@@ -17,7 +17,7 @@ import { Modal } from './modal';
 import banner from '../static/banner.png'
 import '../static/App.css'
 
-export function Jobs({job}){
+export function RemoteJobs({job}){
   const [open, setOpen] = React.useState(false);
   const [selectedJob,selectJob] =React.useState({})
   const[search, setSearch] = React.useState('')
@@ -47,10 +47,10 @@ export function Jobs({job}){
     return(
        <Grid container style={{justifyContent:'center'}}>
 
-<Container maxWidth="sm" style={{flexGrow:1}}>
+<Container maxWidth="md" style={{flexGrow:1}}>
             <Grid container >
               <Grid container style={{justifyContent:'center', marginTop:30}}>
-              <Typography variant='h3' style={{textAlign:'center'}} > Job Listings</Typography>
+              <Typography variant='h3' style={{textAlign:'center'}} >Remote Dev Jobs</Typography>
               </Grid>
             <Grid container style={{ justifyContent: "center", marginTop: 40 }}>
           <Paper style={{ backgroundColor: "transparent" }}>
@@ -135,9 +135,8 @@ export function Jobs({job}){
                                 }}
                               >
                                 {" "}
-                                <FaMapMarkerAlt /> {item.location} salary: {item.salary}
+                                <FaMapMarkerAlt /> {item.location}  {item.salary}
                               </Typography>
-                              
                               <div style={{ marginTop: 15 }}>
                                 <a href={item.url}
                                   style={{

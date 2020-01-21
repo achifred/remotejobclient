@@ -92,7 +92,7 @@ export const aboutus = {
 
 export const contactus ={
   phone:'+233548480707',
-  email:'achifdevjobs@gmail.com',
+  email:'achifdevjob@gmail.com',
   address:'Adenta Accra, Ghana',
   description:" How's it going? Got a special request, Want to see your job listed on our platform, we are more than happy yo hear from you. "
 }
