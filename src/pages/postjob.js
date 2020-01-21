@@ -37,7 +37,7 @@ export class Postjob extends Component {
             salary:this.state.salary,
             
         }
-        const url = process.env.NODE_ENV==='production'?process.env.REACT_APP_ADDJOB:'http://localhost:5000/'
+        const url = process.env.NODE_ENV==='production'?process.env.REACT_APP_URL:'http://localhost:5000/'
         const link = `${url}devjob`
 
         let response = await apiPost(link, 'auth', 'POST',data)

@@ -14,7 +14,7 @@ import { Grid,
     import moment from "moment";
 
 import { Modal } from './modal';
-import banner from '../static/banner.png'
+import banner from '../static/undraw_files_6b3d.svg'
 import '../static/App.css'
 
 export function Jobs({job}){
