@@ -56,7 +56,7 @@ export const how = [
 
 export const heading = {
   title:
-    "Apply to that dream dev job today and get hired. Make that dream a reality"
+    "Apply to that dream developer job today and get hired. Make that dream a reality"
 };
 export const subtxt = {
   title:

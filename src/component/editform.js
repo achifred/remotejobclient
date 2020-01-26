@@ -1,16 +1,10 @@
 import React, { Component } from "react";
-import {
-	Grid,
-	TextField,
-	Button,
-	Container,
-	Typography
-} from "@material-ui/core";
-import { apiPost } from "../ajax/driver";
-import { LoadingIndicator } from "../component/loadingIndicator";
-import { Redirect } from "react-router-dom";
+import Button from "@material-ui/core/Button";
 
-export class Postjob extends Component {
+import { Grid, TextField, Container, Typography } from "@material-ui/core";
+import { apiPost } from "../ajax/driver";
+
+export class Editform extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -21,18 +15,30 @@ export class Postjob extends Component {
 			type: "",
 			description: "",
 			salary: "",
-			techstack: "",
-			isLoading: false
+			jobid: "",
+			techstack: ""
 		};
 	}
 
-	onchange = event => {
+	componentDidMount() {
 		this.setState({
-			[event.target.name]: event.target.value
+			title: this.props.job_title,
+
+			company: this.props.company_name,
+			company_url: this.props.companyurl,
+			location: this.props.job_location,
+			type: this.props.job_type,
+			description: this.props.job_description,
+			salary: this.props.job_salary,
+			jobid: this.props.jobid
 		});
+	}
+
+	onchange = event => {
+		this.setState({ [event.target.name]: event.target.value });
 	};
 
-	addJob = async event => {
+	editJob = async event => {
 		try {
 			event.preventDefault();
 			const data = {
@@ -43,23 +49,22 @@ export class Postjob extends Component {
 				type: this.state.type,
 				description: this.state.description,
 				salary: this.state.salary,
-				id: localStorage.getItem("userinfo")
+				id: this.state.jobid
+				//id: localStorage.getItem("userinfo")
 			};
 			const url =
 				process.env.NODE_ENV === "production"
 					? process.env.REACT_APP_URL
 					: "http://localhost:5000/";
-			const link = `${url}devjob`;
-			//console.log(data);
-			this.setState({ isLoading: true });
-			let response = await apiPost(link, "auth", "POST", data);
-
+			const link = `${url}devjob/updatejob`;
+			let response = await apiPost(link, "auth", "PUT", data);
+			//console.log(response);
 			if (response.message === "success") {
-				alert("job added successfully");
-				this.setState({ isLoading: false });
-				this.props.history.push("/jobs");
+				alert("job updated successfully");
+				//this.setState({ isLoading: false });
+				this.props.history.push("/profile");
 			} else {
-				this.setState({ isLoading: false });
+				//this.setState({ isLoading: false });
 				alert("sorry try again");
 			}
 		} catch (error) {
@@ -67,9 +72,17 @@ export class Postjob extends Component {
 		}
 	};
 	render() {
-		if (!localStorage.getItem("token")) {
-			return <Redirect to="/login" />;
-		}
+		const {
+			job_title,
+			company_name,
+			companyurl,
+			job_location,
+			job_type,
+			job_description,
+			job_salary
+		} = this.props;
+
+		//console.log(title);
 
 		return (
 			<div>
@@ -79,11 +92,10 @@ export class Postjob extends Component {
 						component="h5"
 						style={{ textAlign: "center" }}
 					>
-						Please fill in the form below to post a job
+						Edit a job
 					</Typography>
 					<Grid container style={{ justifyContent: "center" }}>
-						{this.state.isLoading ? <LoadingIndicator /> : ""}
-						<form onSubmit={this.addJob}>
+						<form onSubmit={this.editJob}>
 							<Grid container spacing={3}>
 								<Grid item xs={12} sm={6}>
 									<div>
@@ -94,6 +106,7 @@ export class Postjob extends Component {
 											required
 											name="title"
 											onChange={this.onchange}
+											defaultValue={job_title}
 											style={styles.input}
 										/>
 									</div>
@@ -105,6 +118,7 @@ export class Postjob extends Component {
 											required
 											name="company"
 											onChange={this.onchange}
+											defaultValue={company_name}
 											style={styles.input}
 										/>
 									</div>
@@ -115,6 +129,7 @@ export class Postjob extends Component {
 											type="text"
 											name="company_url"
 											onChange={this.onchange}
+											defaultValue={companyurl}
 											style={styles.input}
 										/>
 									</div>
@@ -126,6 +141,7 @@ export class Postjob extends Component {
 											required
 											name="location"
 											onChange={this.onchange}
+											defaultValue={job_location}
 											style={styles.input}
 										/>
 									</div>
@@ -137,6 +153,7 @@ export class Postjob extends Component {
 											required
 											name="type"
 											onChange={this.onchange}
+											defaultValue={job_type}
 											style={styles.input}
 										/>
 									</div>
@@ -153,6 +170,7 @@ export class Postjob extends Component {
 											rows={10}
 											name="description"
 											onChange={this.onchange}
+											defaultValue={job_description}
 											style={styles.input}
 										/>
 									</div>
@@ -163,24 +181,19 @@ export class Postjob extends Component {
 											type="text"
 											name="salary"
 											onChange={this.onchange}
-											style={styles.input}
-										/>
-									</div>
-
-									<div>
-										<TextField
-											placeholder="Tech stack"
-											variant="outlined"
-											type="text"
-											name="techstack"
-											onChange={this.onchange}
+											defaultValue={job_salary}
 											style={styles.input}
 										/>
 									</div>
 								</Grid>
 							</Grid>
-							<div style={{ textAlign: "center", marginTop: 25 }}>
-								<Button type="submit">Post Job</Button>
+							<div
+								style={{
+									textAlign: "center",
+									marginTop: 25
+								}}
+							>
+								<Button type="submit">Edit Job</Button>
 							</div>
 						</form>
 					</Grid>

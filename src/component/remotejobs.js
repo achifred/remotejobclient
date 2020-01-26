@@ -16,8 +16,9 @@ import { Grid,
 import { Modal } from './modal';
 import banner from '../static/banner.png'
 import '../static/App.css'
+import { LoadingIndicator } from './loadingIndicator';
 
-export function RemoteJobs({job}){
+export function RemoteJobs({job,isloading}){
   const [open, setOpen] = React.useState(false);
   const [selectedJob,selectJob] =React.useState({})
   const[search, setSearch] = React.useState('')
@@ -67,7 +68,7 @@ export function RemoteJobs({job}){
             />
           </Paper>
         </Grid>
-
+              {isloading===true?<LoadingIndicator/>:''}
               <Modal open={open} handleClose={handleClose} job={selectedJob} />
              
               {
