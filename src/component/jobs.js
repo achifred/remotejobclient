@@ -10,7 +10,8 @@ import {
 	ListItemText,
 	Paper,
 	InputBase,
-	Button
+	Button,
+	Chip
 } from "@material-ui/core";
 import { FaMapMarkerAlt, FaClock } from "react-icons/fa";
 
@@ -20,11 +21,14 @@ import { Modal } from "./modal";
 import banner from "../static/undraw_files_6b3d.svg";
 import "../static/App.css";
 import { LoadingIndicator } from "./loadingIndicator";
+import { colors } from "./constant";
+import { Applymodal } from "./applymodal";
 
 export function Jobs({ job, isloading }) {
 	const [open, setOpen] = React.useState(false);
-
+	const [apply, setApply] = React.useState(false);
 	const [selectedJob, selectJob] = React.useState({});
+	const [selecteditem, selectItem] = React.useState({});
 	const [search, setSearch] = React.useState("");
 	const handleClickOpen = () => {
 		setOpen(true);
@@ -32,6 +36,13 @@ export function Jobs({ job, isloading }) {
 
 	const handleClose = () => {
 		setOpen(false);
+	};
+	const openApply = () => {
+		setApply(true);
+	};
+
+	const closeApply = () => {
+		setApply(false);
 	};
 	const onchange = e => {
 		setSearch(e.target.value);
@@ -46,7 +57,7 @@ export function Jobs({ job, isloading }) {
 						-1
 				);
 		  })
-		: [];
+		: "";
 
 	return (
 		<Grid container style={{ justifyContent: "center" }}>
@@ -58,7 +69,7 @@ export function Jobs({ job, isloading }) {
 					>
 						<Typography
 							variant="h3"
-							style={{ textAlign: "center" }}
+							style={{ textAlign: "center", color: colors.blue }}
 						>
 							{" "}
 							Job Listings
@@ -88,127 +99,188 @@ export function Jobs({ job, isloading }) {
 						handleClose={handleClose}
 						job={selectedJob}
 					/>
+					<Applymodal
+						open={apply}
+						handleClose={closeApply}
+						job={selecteditem}
+					/>
 
-					{filteredJob.map(item => (
-						<div
-							style={{
-								marginTop: 30,
-								marginBottom: -10,
-								justifyContent: "center",
-								textAlign: "center"
-							}}
-							key={item.id}
-						>
-							<List
+					{filteredJob != "" ? (
+						filteredJob.map(item => (
+							<div
 								style={{
-									width: "100%",
-									maxWidth: 600,
-									textAlign: "center",
-									justifyContent: "center"
+									marginTop: 30,
+									marginBottom: -10,
+									justifyContent: "center",
+									textAlign: "center"
 								}}
+								key={item.id}
 							>
-								<ListItem alignItems="center">
-									<img
-										className="banner"
-										alt=""
-										src={
-											item.company_logo
-												? item.company_logo
-												: banner
-										}
-									/>
+								<List
+									style={{
+										width: "100%",
+										maxWidth: 600,
+										textAlign: "center",
+										justifyContent: "center"
+									}}
+								>
+									<ListItem alignItems="center">
+										<img
+											className="banner"
+											alt=""
+											src={
+												item.company_logo
+													? item.company_logo
+													: banner
+											}
+										/>
 
-									<ListItemText
-										style={{
-											fontFamily: `'Be Vietnam', sans-serif`
-										}}
-										primary={item.title}
-										secondary={
-											<React.Fragment>
-												<Typography
-													style={{
-														textAlign: "justify",
-														marginTop: 5,
-														marginBottom: 6,
-														fontFamily: `'Be Vietnam', sans-serif`
-													}}
-												>
+										<ListItemText
+											style={{
+												fontFamily: `'Be Vietnam', sans-serif`
+											}}
+											primary={item.title}
+											secondary={
+												<React.Fragment>
+													<Typography
+														style={{
+															textAlign:
+																"justify",
+															marginTop: 5,
+															marginBottom: 6,
+															fontFamily: `'Be Vietnam', sans-serif`
+														}}
+													>
+														<div
+															dangerouslySetInnerHTML={{
+																__html: item.description.substring(
+																	0,
+																	200
+																)
+															}}
+														/>
+													</Typography>
+
+													<Typography
+														style={{
+															marginTop: 5,
+															fontFamily: `'Be Vietnam', sans-serif`,
+															fontStyle: "italic"
+														}}
+														component="span"
+														variant="body2"
+													>
+														<FaClock />{" "}
+														{moment(item.created_at)
+															.startOf("hour")
+															.fromNow()}{" "}
+														{item.type}
+													</Typography>
+													<Typography
+														style={{
+															fontFamily: `'Be Vietnam', sans-serif`,
+															marginTop: 5
+														}}
+													>
+														{" "}
+														<FaMapMarkerAlt />{" "}
+														{item.location} Salary :{" "}
+														{item.salary}
+													</Typography>
+
+													<Typography
+														style={{
+															fontFamily: `'Be Vietnam', sans-serif`,
+															marginTop: 5
+														}}
+													>
+														Tech stack{" "}
+														{item.techstack
+															.split(" ")
+															.map(item => (
+																<Chip
+																	label={item}
+																	style={{
+																		marginLeft: 6
+																	}}
+																/>
+															))}
+													</Typography>
+
+													<Typography
+														style={{
+															fontFamily: `'Be Vietnam', sans-serif`,
+															marginTop: 5
+														}}
+													>
+														{" "}
+														Exp : {item.level}{" "}
+														Deadine :{" "}
+														{item.deadline}
+													</Typography>
+
 													<div
-														dangerouslySetInnerHTML={{
-															__html: item.description.substring(
-																0,
-																200
-															)
-														}}
-													/>
-												</Typography>
-
-												<Typography
-													style={{
-														marginTop: 5,
-														fontFamily: `'Be Vietnam', sans-serif`,
-														fontStyle: "italic"
-													}}
-													component="span"
-													variant="body2"
-												>
-													<FaClock />{" "}
-													{moment(item.created_at)
-														.startOf("hour")
-														.fromNow()}{" "}
-													{item.type}
-												</Typography>
-												<Typography
-													style={{
-														fontFamily: `'Be Vietnam', sans-serif`,
-														marginTop: 5
-													}}
-												>
-													{" "}
-													<FaMapMarkerAlt />{" "}
-													{item.location} salary:{" "}
-													{item.salary}
-												</Typography>
-
-												<div style={{ marginTop: 15 }}>
-													<a
-														href={item.url}
 														style={{
-															textDecoration:
-																"none",
-															fontFamily: `'Be Vietnam', sans-serif`,
-															marginRight: 15,
-															color: "#B40A1B"
-														}}
-														target="blank"
-													>
-														APPLY
-													</a>
-													<Button
-														style={{
-															textDecoration:
-																"none",
-															fontFamily: `'Be Vietnam', sans-serif`,
-															marginRight: 15,
-															color: "#00848C"
-														}}
-														variant="text"
-														onClick={() => {
-															handleClickOpen();
-															selectJob(item);
+															marginTop: 15
 														}}
 													>
-														Read more
-													</Button>
-												</div>
-											</React.Fragment>
-										}
-									/>
-								</ListItem>
-								<Divider variant="inset" component="li" />
-							</List>
-						</div>
-					))}
+														<Button
+															style={{
+																textDecoration:
+																	"none",
+																fontFamily: `'Be Vietnam', sans-serif`,
+																marginRight: 15,
+																color:
+																	colors.red
+															}}
+															variant="text"
+															onClick={() => {
+																openApply();
+																selectItem(
+																	item
+																);
+															}}
+														>
+															Apply
+														</Button>
+														<Button
+															style={{
+																textDecoration:
+																	"none",
+																fontFamily: `'Be Vietnam', sans-serif`,
+																marginRight: 15,
+																color:
+																	colors.blue
+															}}
+															variant="text"
+															onClick={() => {
+																handleClickOpen();
+																selectJob(item);
+															}}
+														>
+															Read more
+														</Button>
+													</div>
+												</React.Fragment>
+											}
+										/>
+									</ListItem>
+									<Divider variant="inset" component="li" />
+								</List>
+							</div>
+						))
+					) : (
+						<Grid
+							container
+							style={{ justifyContent: "center", marginTop: 60 }}
+						>
+							<Typography
+								style={{ color: colors.blue, fontSize: 30 }}
+							>
+								Sorry no data to display
+							</Typography>
+						</Grid>
+					)}
 				</Grid>
 			</Container>
 		</Grid>

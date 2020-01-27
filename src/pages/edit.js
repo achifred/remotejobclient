@@ -29,6 +29,10 @@ export function Edit(props) {
 					job_description={item.job_description}
 					job_salary={item.job_salary}
 					jobid={item.jobid}
+					job_techstack={item.job_techstack}
+					job_apply={item.job_apply}
+					job_deadline={item.job_deadline}
+					job_level={item.job_level}
 					history={props.history}
 					key={item.jobid}
 				/>

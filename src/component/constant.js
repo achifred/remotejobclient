@@ -2,7 +2,7 @@ export const baseUrl = "http://localhost:3000/";
 export const colors = {
 	mintgreen: "#008080",
 	red: "red",
-	orange: "#DF8600",
+	orange: "orange",
 	yellow: "#FFC11E",
 	green: "#117243",
 	lightgreen: "#E5F3F2",

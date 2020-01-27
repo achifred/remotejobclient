@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Grid, Toolbar, Typography } from "@material-ui/core";
+import { Grid, Toolbar, Typography, Button } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import { Sidebar } from "./sidebar";
 import SidebarContent from "./sidebarContent";
@@ -28,24 +28,37 @@ function Navbar(props) {
 		<Grid container style={{ display: "flex", justifyContent: "flex-end" }}>
 			<Grid>
 				<Link style={{ textDecoration: "none" }} to={"/"}>
-					<Typography style={{ marginRight: 10 }}>Home</Typography>
+					<Typography style={{ marginRight: 10, color: colors.blue }}>
+						Home
+					</Typography>
+				</Link>
+			</Grid>
+			<Grid>
+				<Link style={{ textDecoration: "none" }} to={"/jobs"}>
+					<Typography style={{ marginRight: 10, color: colors.blue }}>
+						Jobs
+					</Typography>
 				</Link>
 			</Grid>
 			<Grid>
 				<Link style={{ textDecoration: "none" }} to={"/remotejobs"}>
-					<Typography style={{ marginRight: 10 }}>
+					<Typography style={{ marginRight: 10, color: colors.blue }}>
 						RemoteJobs
 					</Typography>
 				</Link>
 			</Grid>
 			<Grid>
 				<Link style={{ textDecoration: "none" }} to={"/about"}>
-					<Typography style={{ marginRight: 10 }}>About</Typography>
+					<Typography style={{ marginRight: 10, color: colors.blue }}>
+						About
+					</Typography>
 				</Link>
 			</Grid>
 			<Grid>
 				<Link style={{ textDecoration: "none" }} to={"/contact"}>
-					<Typography style={{ marginRight: 10 }}>Contact</Typography>
+					<Typography style={{ marginRight: 10, color: colors.blue }}>
+						Contact
+					</Typography>
 				</Link>
 			</Grid>
 			<Grid>
@@ -53,11 +66,15 @@ function Navbar(props) {
 					style={{ textDecoration: "none" }}
 					to={localStorage.getItem("token") ? "/profile" : "/login"}
 				>
-					<Typography style={{ marginRight: 10 }}>
-						{localStorage.getItem("token")
-							? localStorage.getItem("useremail").substring(0, 5)
-							: "Login"}
-					</Typography>
+					<Button
+						style={{
+							marginRight: 10,
+							marginTop: -4,
+							...styles.registerbtn
+						}}
+					>
+						{localStorage.getItem("token") ? "Dashboard" : "Login"}
+					</Button>
 				</Link>
 			</Grid>
 		</Grid>

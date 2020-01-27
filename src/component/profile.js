@@ -57,22 +57,34 @@ function Profile({ data, isloading, deletejob, history }) {
 					style={{ justifyContent: "center" }}
 					spacing={3}
 				>
-					<Grid
-						style={{
-							justifyContent: "center",
-							marginTop: 30,
-							marginBottom: -10
-						}}
-					>
-						{data.map(item => (
+					{data.map(item => (
+						<Grid
+							style={{
+								justifyContent: "center",
+								marginTop: 30,
+								marginBottom: -10
+							}}
+							item
+						>
 							<Paper
-								style={{ height: 300, width: 300 }}
+								style={{ height: "auto", width: 300 }}
 								key={item.jobid}
 							>
 								<div style={{ textAlign: "center" }}>
-									<Typography>{item.job_title}</Typography>
+									<Typography
+										style={{
+											marginTop: 8,
+											fontWeight: "bold"
+										}}
+									>
+										{item.job_title.toUpperCase()}
+									</Typography>
+
 									<Typography>
-										{item.job_description}
+										tech stack :{" "}
+										{item.job_tech.split(" ").map(item => (
+											<Typography>{item}</Typography>
+										))}
 									</Typography>
 								</div>
 								<div
@@ -103,8 +115,8 @@ function Profile({ data, isloading, deletejob, history }) {
 									</Button>
 								</div>
 							</Paper>
-						))}
-					</Grid>
+						</Grid>
+					))}
 				</Grid>
 			</Container>
 		</Grid>

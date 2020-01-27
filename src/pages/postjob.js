@@ -22,6 +22,9 @@ export class Postjob extends Component {
 			description: "",
 			salary: "",
 			techstack: "",
+			apply: "",
+			deadline: "",
+			level: "",
 			isLoading: false
 		};
 	}
@@ -43,6 +46,10 @@ export class Postjob extends Component {
 				type: this.state.type,
 				description: this.state.description,
 				salary: this.state.salary,
+				apply: this.state.apply,
+				techstack: this.state.techstack,
+				deadline: this.state.deadline,
+				level: this.state.level,
 				id: localStorage.getItem("userinfo")
 			};
 			const url =
@@ -140,22 +147,6 @@ export class Postjob extends Component {
 											style={styles.input}
 										/>
 									</div>
-								</Grid>
-
-								<Grid item xs={12} sm={6}>
-									<div>
-										<TextField
-											placeholder="job description"
-											variant="outlined"
-											type="text"
-											required
-											multiline
-											rows={10}
-											name="description"
-											onChange={this.onchange}
-											style={styles.input}
-										/>
-									</div>
 									<div>
 										<TextField
 											placeholder="salary"
@@ -173,6 +164,55 @@ export class Postjob extends Component {
 											variant="outlined"
 											type="text"
 											name="techstack"
+											onChange={this.onchange}
+											style={styles.input}
+										/>
+									</div>
+								</Grid>
+
+								<Grid item xs={12} sm={6}>
+									<div>
+										<TextField
+											placeholder="job description"
+											variant="outlined"
+											type="text"
+											required
+											multiline
+											rows={7}
+											name="description"
+											onChange={this.onchange}
+											style={styles.input}
+										/>
+									</div>
+									<div>
+										<TextField
+											placeholder="How to apply"
+											variant="outlined"
+											type="text"
+											required
+											multiline
+											rows={7}
+											name="apply"
+											onChange={this.onchange}
+											style={styles.input}
+										/>
+									</div>
+									<div>
+										<TextField
+											placeholder="Job experience level"
+											variant="outlined"
+											type="text"
+											name="level"
+											onChange={this.onchange}
+											style={styles.input}
+										/>
+									</div>
+									<div>
+										<TextField
+											placeholder="Dead line for applications"
+											variant="outlined"
+											type="text"
+											name="deadline"
 											onChange={this.onchange}
 											style={styles.input}
 										/>

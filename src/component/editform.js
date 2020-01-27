@@ -16,7 +16,10 @@ export class Editform extends Component {
 			description: "",
 			salary: "",
 			jobid: "",
-			techstack: ""
+			techstack: "",
+			apply: "",
+			deadline: "",
+			level: ""
 		};
 	}
 
@@ -30,7 +33,11 @@ export class Editform extends Component {
 			type: this.props.job_type,
 			description: this.props.job_description,
 			salary: this.props.job_salary,
-			jobid: this.props.jobid
+			jobid: this.props.jobid,
+			techstack: this.props.job_techstack,
+			apply: this.props.job_apply,
+			deadline: this.props.job_deadline,
+			level: this.props.job_level
 		});
 	}
 
@@ -49,7 +56,11 @@ export class Editform extends Component {
 				type: this.state.type,
 				description: this.state.description,
 				salary: this.state.salary,
-				id: this.state.jobid
+				id: this.state.jobid,
+				techstack: this.state.techstack,
+				apply: this.state.apply,
+				deadline: this.state.deadline,
+				level: this.state.level
 				//id: localStorage.getItem("userinfo")
 			};
 			const url =
@@ -79,7 +90,11 @@ export class Editform extends Component {
 			job_location,
 			job_type,
 			job_description,
-			job_salary
+			job_salary,
+			job_techstack,
+			job_apply,
+			job_deadline,
+			job_level
 		} = this.props;
 
 		//console.log(title);
@@ -157,6 +172,28 @@ export class Editform extends Component {
 											style={styles.input}
 										/>
 									</div>
+									<div>
+										<TextField
+											placeholder="salary"
+											variant="outlined"
+											type="text"
+											name="salary"
+											onChange={this.onchange}
+											defaultValue={job_salary}
+											style={styles.input}
+										/>
+									</div>
+									<div>
+										<TextField
+											placeholder="Tech stack eg. reactjs, javascript"
+											variant="outlined"
+											type="text"
+											name="techstack"
+											onChange={this.onchange}
+											defaultValue={job_techstack}
+											style={styles.input}
+										/>
+									</div>
 								</Grid>
 
 								<Grid item xs={12} sm={6}>
@@ -167,21 +204,47 @@ export class Editform extends Component {
 											type="text"
 											required
 											multiline
-											rows={10}
+											rows={7}
 											name="description"
 											onChange={this.onchange}
 											defaultValue={job_description}
 											style={styles.input}
 										/>
 									</div>
+
 									<div>
 										<TextField
-											placeholder="salary"
+											placeholder="How to apply"
 											variant="outlined"
 											type="text"
-											name="salary"
+											multiline
+											rows={7}
+											name="apply"
 											onChange={this.onchange}
-											defaultValue={job_salary}
+											defaultValue={job_apply}
+											style={styles.input}
+										/>
+									</div>
+
+									<div>
+										<TextField
+											placeholder="Job experience level"
+											variant="outlined"
+											type="text"
+											name="level"
+											onChange={this.onchange}
+											defaultValue={job_level}
+											style={styles.input}
+										/>
+									</div>
+									<div>
+										<TextField
+											placeholder="Dead line for applications"
+											variant="outlined"
+											type="text"
+											name="deadline"
+											onChange={this.onchange}
+											defaultValue={job_deadline}
 											style={styles.input}
 										/>
 									</div>

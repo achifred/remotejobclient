@@ -27,8 +27,17 @@ function HomeLayout() {
 						<Href path="/jobs" styles={styles.btn1}>
 							Browse Jobs
 						</Href>
-						<Href path={localStorage.getItem('token')?'/postjob':'/register'} styles={styles.btn2}>
-							{localStorage.getItem('token')?'post a job':'signup to post a job'}
+						<Href
+							path={
+								localStorage.getItem("token")
+									? "/postjob"
+									: "/register"
+							}
+							styles={styles.btn2}
+						>
+							{localStorage.getItem("token")
+								? "post a job"
+								: "signup to post a job"}
 						</Href>
 					</Grid>
 				</Container>
@@ -119,9 +128,9 @@ function HomeLayout() {
 								Why Use AchifDevJobs
 							</h1>
 						</Grid>
-						<Grid container style={{ justifyContent: "center" }}>
+						{/*<Grid container style={{ justifyContent: "center" }}>
 							<p className="whydesc">{howitworkssubtxt.title}</p>
-						</Grid>
+										</Grid>*/}
 					</Grid>
 				</Container>
 				<Container>

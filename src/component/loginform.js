@@ -50,14 +50,19 @@ class Login extends Component {
 			const link = `${url}users/login`;
 			this.setState({ islogedin: true });
 			const result = await apiPost(link, "auth", "POST", data);
-			if (result.token) {
+			if (result.message === "success") {
 				this.setState({ islogedin: false });
 				localStorage.setItem("token", result.token);
 				const userinfo = jwt.decode(result.token);
 
 				localStorage.setItem("userinfo", userinfo.id);
 				localStorage.setItem("useremail", userinfo.email);
+
 				this.props.history.push("/profile");
+				window.location.reload();
+			} else {
+				this.setState({ islogedin: false });
+				alert("wrong credentials");
 			}
 		} catch (error) {
 			console.log(error.message);
