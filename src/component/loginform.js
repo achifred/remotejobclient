@@ -57,6 +57,7 @@ class Login extends Component {
 
 				localStorage.setItem("userinfo", userinfo.id);
 				localStorage.setItem("useremail", userinfo.email);
+				localStorage.setItem("role", userinfo.role);
 
 				this.props.history.push("/profile");
 				window.location.reload();

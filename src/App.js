@@ -13,6 +13,10 @@ import Login from "./component/loginform";
 import SignUp from "./component/signup";
 import { Userprofile } from "./pages/userprofile";
 import { Edit } from "./pages/edit";
+import Dashboard from "./admin/dashboard";
+import Users from "./admin/users";
+import Alljobs from "./admin/alljobs";
+import { ProtectedRoute } from "./component/protectedRoute";
 
 class App extends Component {
 	render() {
@@ -70,6 +74,17 @@ class App extends Component {
 							path="/editjob/:id"
 							exact
 							render={props => <Edit {...props} />}
+						/>
+						<ProtectedRoute
+							path="/dashboard"
+							exact
+							component={Dashboard}
+						/>
+						<ProtectedRoute path="/users" exact component={Users} />
+						<ProtectedRoute
+							path="/alljobs"
+							exact
+							component={Alljobs}
 						/>
 						<Route path="" component={Error404} />
 					</Switch>

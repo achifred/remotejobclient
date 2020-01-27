@@ -276,7 +276,9 @@ export function Jobs({ job, isloading }) {
 						>
 							<Typography
 								style={{ color: colors.blue, fontSize: 30 }}
-							></Typography>
+							>
+								Loading
+							</Typography>
 						</Grid>
 					)}
 				</Grid>
