@@ -43,3 +43,8 @@ export const apiPost = async (url, auth, mode, data) => {
 		console.log(error.message);
 	}
 };
+
+export const randomPictures = data => {
+	const randcolors = data;
+	return randcolors[Math.floor(Math.random() * randcolors.length)];
+};

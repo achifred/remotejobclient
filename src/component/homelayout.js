@@ -3,11 +3,12 @@ import { Grid, Paper, Typography, Avatar, Container } from "@material-ui/core";
 
 import { colors } from "./constant";
 import { Header } from "./Header";
-import backgroundPictures from "../static/undraw_multitasking_hqg3.svg";
+import { backgroundPictures } from "./pictures";
 
 import { Data, how, heading, subtxt, howitworkssubtxt } from "./data";
 
 import { Href } from "./href";
+import { randomPictures } from "../ajax/driver";
 
 function HomeLayout() {
 	return (
@@ -209,7 +210,7 @@ const styles = {
 		//top: 70,
 
 		background: `linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-      url(${backgroundPictures})`,
+      url(${randomPictures(backgroundPictures)})`,
 		//justifyContent: 'center',
 		//textAlign: 'center',
 		//backgroundSize: 'cover',
